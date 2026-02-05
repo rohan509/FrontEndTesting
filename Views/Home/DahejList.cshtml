@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>She Said Yes! 💕</title>
+  <title>Dahej List</title>
 
   <link rel="stylesheet" href="./style.css" />
   <style>
@@ -17,7 +17,7 @@
     body {
       background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
       background-size: 400% 400%;
-      background-image: url('/images/2023-07-14rainbowdancers.gif');
+      
       background-attachment: fixed;
       background-position: center;
       background-repeat: repeat;
@@ -31,11 +31,16 @@
       position: relative;
     }
 
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: #f0f;
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -53,87 +58,145 @@
       border: 3px solid rgba(255, 20, 147, 0.3);
     }
 
-    .tenor-gif-embed {
-      margin-bottom: 20px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(255, 20, 147, 0.4);
-      border: 3px solid rgba(255, 20, 147, 0.3);
-    }
-
     h1 {
       font-size: 2.5em;
       background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       font-weight: 800;
       letter-spacing: 2px;
-      text-shadow: 0 4px 8px rgba(255, 20, 147, 0.2);
+    }
+
+    .list-container {
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .list-container ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .list-container li {
+      font-size: 1.2em;
+      color: #333;
+      margin: 20px 0;
+      padding-left: 40px;
+      position: relative;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .list-container li::before {
+      content: '✨';
+      position: absolute;
+      left: 0;
+      font-size: 1.3em;
+      filter: drop-shadow(0 2px 4px rgba(255, 20, 147, 0.3));
     }
 
     .celebration {
-      font-size: 3em;
-      margin-top: 15px;
+      font-size: 2.5em;
+      margin-top: 30px;
+      text-align: center;
     }
 
     .hearts {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 15px;
       margin-top: 20px;
-      font-size: 2.5em;
+      font-size: 2em;
     }
 
     .heart {
       filter: drop-shadow(0 4px 8px rgba(255, 20, 147, 0.3));
     }
 
-    .sparkle {
-      position: absolute;
-      font-size: 1.5em;
+    .button-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
     }
 
-    .dancing-minions {
-      position: fixed;
-      font-size: 3em;
-      pointer-events: none;
-      z-index: 0;
+    .btn-action {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-accepted {
+      background: linear-gradient(135deg, #52c41a 0%, #95de64 100%);
+      color: white;
+      box-shadow: 0 5px 15px rgba(82, 196, 26, 0.4);
+    }
+
+    .btn-accepted:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(82, 196, 26, 0.6);
+    }
+
+    .btn-rejected {
+      background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 77, 79, 0.4);
+    }
+
+    .btn-rejected:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 77, 79, 0.6);
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="tenor-gif-embed" data-postid="253027946666209433" data-share-method="host" data-aspect-ratio="1.37853"
-      data-width="100%">
-      <a
-        href="https://tenor.com/view/mochi-cat-mochi-and-goma-goma-and-peach-mochi-mochi-peach-cat-gif-gif-253027946666209433">Mochi
-        Cat GIF</a>from <a href="https://tenor.com/search/mochi-gifs">Mochi GIFs</a>
+    <h1>My Dahej List 💍</h1>
+    
+    <div class="list-container">
+      <ul>
+        <li>Metro City mai 4BKH flat</li>
+        <li>Ek Scorpio-N top Model</li>
+        <li>15 lakh cash</li>
+      </ul>
     </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <h1>I knew it! You Love me a lot 😘</h1>
+
     <div class="celebration">🎉</div>
     <div class="hearts">
       <span class="heart">💕</span>
       <span class="heart">💖</span>
       <span class="heart">💗</span>
     </div>
+
+    <div class="button-container">
+      <a class="btn-action btn-accepted" asp-controller="Home" asp-action="Para">✅ Accepted</a>
+      <button class="btn-action btn-rejected" onclick="handleRejected()">❌ Rejected</button>
+    </div>
   </div>
+    </div>
 
   <script>
     // Create confetti effect
     function createConfetti() {
       for (let i = 0; i < 50; i++) {
         const confetti = document.createElement('div');
-        confetti.className = 'confetti';
+        confetti.style.position = 'fixed';
         confetti.style.left = Math.random() * window.innerWidth + 'px';
         confetti.style.top = '-10px';
-        confetti.style.background = ['#ff1493', '#ff69b4', '#ffb6d9', '#ffc0cb', '#ff20b2'][Math.floor(Math.random() * 5)];
         confetti.style.width = Math.random() * 15 + 'px';
         confetti.style.height = confetti.style.width;
+        confetti.style.background = ['#ff1493', '#ff69b4', '#ffb6d9', '#ffc0cb', '#ff20b2'][Math.floor(Math.random() * 5)];
         confetti.style.borderRadius = '50%';
+        confetti.style.pointerEvents = 'none';
         confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear`;
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 5000);
@@ -149,56 +212,27 @@
     // Add sparkles on random positions
     setInterval(() => {
       const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
       sparkle.textContent = '✨';
+      sparkle.style.position = 'fixed';
       sparkle.style.left = Math.random() * window.innerWidth + 'px';
       sparkle.style.top = Math.random() * window.innerHeight + 'px';
+      sparkle.style.fontSize = '1.5em';
+      sparkle.style.pointerEvents = 'none';
       document.body.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), 1000);
     }, 500);
 
-    // Create dancing minions
-    function createDancingMinion() {
-      const minions = ['👨‍🦱', '👱', '🤖'];
-      const minion = document.createElement('div');
-      minion.className = 'dancing-minions';
-      minion.textContent = minions[Math.floor(Math.random() * minions.length)];
-      minion.style.left = Math.random() * window.innerWidth + 'px';
-      minion.style.top = Math.random() * window.innerHeight + 'px';
+    // Handle Rejected button
+    function handleRejected() {
+      const rejectedBtn = event.target;
+      rejectedBtn.textContent = '✅ Accepted';
+      rejectedBtn.classList.remove('btn-rejected');
+      rejectedBtn.classList.add('btn-accepted');
       
-      document.body.appendChild(minion);
-      
-      let posX = parseFloat(minion.style.left);
-      let posY = parseFloat(minion.style.top);
-      let dirX = (Math.random() - 0.5) * 4;
-      let dirY = (Math.random() - 0.5) * 4;
-      
-      const animate = () => {
-        posX += dirX;
-        posY += dirY;
-        
-        if (posX < 0 || posX > window.innerWidth) dirX *= -1;
-        if (posY < 0 || posY > window.innerHeight) dirY *= -1;
-        
-        minion.style.left = posX + 'px';
-        minion.style.top = posY + 'px';
-        minion.style.transform = `rotate(${Math.random() * 20 - 10}deg) scale(${0.8 + Math.random() * 0.4})`;
-        
-        requestAnimationFrame(animate);
-      };
-      
-      animate();
-      
-      setTimeout(() => minion.remove(), 8000);
+      setTimeout(() => {
+        window.location.href = '/Home/Para';
+      }, 2000);
     }
-
-    // Create minions periodically
-    setInterval(createDancingMinion, 1500);
-
-    // Navigate to DahejList when clicking anywhere on the page
-    document.body.addEventListener('click', function() {
-      window.location.href = '/Home/DahejList';
-    });
   </script>
 </body>
 

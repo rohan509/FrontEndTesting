@@ -37,6 +37,16 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult DahejList()
+    {
+        return View();
+    }
+    
+    public IActionResult Para()
+    {
+        return View();
+    }
     
 
    
