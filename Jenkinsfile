@@ -32,11 +32,10 @@ pipeline {
         stage('Deploy (Local)') {
             steps {
                 sh '''
-                echo "Stopping old app if running..."
-                pkill -f ${APP_DLL} || true
-
-                echo "Starting application..."
-                nohup /opt/homebrew/bin/dotnet ${PUBLISH_DIR}/${APP_DLL} > app.log 2>&1 &
+                echo 'Stopping old app if running...'
+                pkill -f MydeploymentProject.dll || true
+                echo 'Starting application...'
+                nohup /opt/homebrew/bin/dotnet ${PUBLISH_DIR}/${APP_DLL}  --urls ${ASPNETCORE_URLS} &
                 '''
             }
         }
