@@ -23,12 +23,11 @@ pipeline {
             }
         }
 
-        stage('Publish') {
-            steps {
-                 sh "/opt/homebrew/bin/dotnet publish ./MydeploymentProject.csproj -c Release -o ${PUBLISH_DIR}"
-
-            }
-        }
+       stage('Publish') {
+    steps {
+        sh "/opt/homebrew/bin/dotnet publish $WORKSPACE/MydeploymentProject.csproj -c Release -o $WORKSPACE/publish"
+    }
+}
 
         stage('Deploy (Local)') {
             steps {
