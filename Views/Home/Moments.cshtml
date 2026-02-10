@@ -1,8 +1,159 @@
 @{
-    ViewData["Title"] = "Moments";
+    ViewData["Title"] = "🎬 Moments";
 }
 
-<div class="text-center mt-5">
-    <h1>@ViewData["Title"]</h1>
-    <p class="lead">abce eooefoefeofeofef</p>
+<style>
+    .moments-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .moments-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+    .moments-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .input-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .input-section label {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        display: block;
+        font-size: 18px;
+    }
+    .input-section input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #f5576c;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+    .input-section input:focus {
+        border-color: #f093fb;
+        box-shadow: 0 0 0 0.2rem rgba(245, 87, 108, 0.25);
+        outline: none;
+    }
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: transform 0.2s;
+    }
+    .submit-btn:hover {
+        transform: scale(1.02);
+    }
+    .hint {
+        color: #666;
+        font-size: 14px;
+        margin-top: 10px;
+        font-style: italic;
+    }
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .photo-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .photo-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .photo-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .photo-number {
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        color: #f5576c;
+        background: #f9f9f9;
+    }
+    .error-msg {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+        text-align: center;
+        border: 1px solid #f5c6cb;
+    }
+    .success-msg {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .success-msg h2 {
+        color: #f5576c;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="moments-container">
+    <div class="moments-header">
+        <h1>@ViewData["Title"]</h1>
+        <p>Unlock your moments! 📸</p>
+    </div>
+
+    <form method="post">
+        <div class="input-section" id="inputSection" style="display: @(ViewBag.ShowPhotos == true ? "none" : "block");">
+            <input type="text" id="category" name="category" autocomplete="off" />
+            <p class="hint">💡 Hint: Enter My Phone Number Without Looking On Phone</p>
+            <button type="submit" class="submit-btn">Check If You Remeber</button>
+        </div>
+    </form>
+
+    @if (ViewBag.ShowPhotos == true)
+    {
+        <div class="success-msg">
+            <h2>🎉 Found 10 Amazing Moments!</h2>
+        </div>
+        <div class="photo-gallery">
+            @for (int i = 1; i <= 10; i++)
+            {
+                <div class="photo-card">
+                    <img src="~/images/download.jpeg" alt="Moment @i" />
+                    <div class="photo-number">Moment @i</div>
+                </div>
+            }
+        </div>
+    }
+    else if (ViewBag.ShowError == true)
+    {
+        <div class="error-msg">
+            ❌ Oops! Seriously yaaaar, Tumna pyaar nahi karti ho 😥
+        </div>
+    }
 </div>

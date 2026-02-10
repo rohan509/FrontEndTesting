@@ -107,5 +107,21 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Moments(string category)
+    {
+        if (!string.IsNullOrEmpty(category) && category.Trim().Equals("8303025419", StringComparison.OrdinalIgnoreCase))
+        {
+            ViewBag.ShowPhotos = true;
+        }
+        else if (!string.IsNullOrEmpty(category))
+        {
+            ViewBag.ShowError = true;
+        }
+        return View();
+    }
+
+
    
 }
