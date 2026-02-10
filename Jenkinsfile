@@ -2,19 +2,15 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_ENVIRONMENT = 'Production'
+        DOTNET_HOME = 'opt/homebrew/bin/dotnet'
+        PATH = "${DOTNET_HOME}:${env.PATH}"
+
         ASPNETCORE_URLS = 'http://localhost:5000'
         PUBLISH_DIR = 'publish'
         APP_DLL = 'MydeploymentProject.dll'
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
 
         stage('Restore') {
             steps {
@@ -50,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 sleep 5
-                curl -f http://localhost:5000 || exit 1
+                curl -f http://localhost:5000
                 '''
             }
         }
