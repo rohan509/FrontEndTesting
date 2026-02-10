@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_HOME = 'opt/homebrew/bin/dotnet'
+        DOTNET_HOME = 'opt/homebrew/bin'
         PATH = "${DOTNET_HOME}:${env.PATH}"
 
         ASPNETCORE_URLS = 'http://localhost:5000'
