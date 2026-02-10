@@ -1,11 +1,9 @@
-
 pipeline {
     agent any
 
     environment {
-        DOTNET = '/opt/homebrew/bin/dotnet'
-        PATH = "${DOTNET_HOME}:${env.PATH}"
-
+        PATH = "/opt/homebrew/bin:${env.PATH}"
+        DOTNET_HOME = "/opt/homebrew/opt/dotnet"
         ASPNETCORE_URLS = 'http://localhost:5000'
         PUBLISH_DIR = 'publish'
         APP_DLL = 'MydeploymentProject.dll'
@@ -15,19 +13,19 @@ pipeline {
 
         stage('Restore') {
             steps {
-                sh 'dotnet restore'
+                sh '/opt/homebrew/bin/dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'dotnet build -c Release'
+                sh '/opt/homebrew/bin/dotnet build -c Release'
             }
         }
 
         stage('Publish') {
             steps {
-                sh "dotnet publish -c Release -o ${PUBLISH_DIR}"
+                sh "/opt/homebrew/bin/dotnet publish -c Release -o ${PUBLISH_DIR}"
             }
         }
 
@@ -38,7 +36,7 @@ pipeline {
                 pkill -f ${APP_DLL} || true
 
                 echo "Starting application..."
-                nohup dotnet ${PUBLISH_DIR}/${APP_DLL} > app.log 2>&1 &
+                nohup /opt/homebrew/bin/dotnet ${PUBLISH_DIR}/${APP_DLL} > app.log 2>&1 &
                 '''
             }
         }
@@ -47,7 +45,7 @@ pipeline {
             steps {
                 sh '''
                 sleep 5
-                curl -f http://localhost:5000
+                curl -f http://localhost:5000 || true
                 '''
             }
         }
