@@ -10,32 +10,27 @@ pipeline {
 
         stage('Restore') {
             steps {
-                echo 'Restoring NuGet packages'
                 sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building application'
                 sh 'dotnet build -c Release'
             }
         }
 
         stage('Publish') {
             steps {
-                echo 'Publishing application'
-                sh 'dotnet publish -c Release -o publish'
+                sh 'dotnet publish MydeploymentProject.csproj -c Release -o publish'
             }
         }
     }
 
     post {
         success {
-            echo 'CI Pipeline completed successfully 🎉'
-        }
-        failure {
-            echo 'CI Pipeline failed ❌'
+            echo 'Archiving publish artifacts'
+            archiveArtifacts artifacts: 'publish/**', fingerprint: true
         }
     }
 }
