@@ -1,0 +1,254 @@
+@{
+    ViewData["Title"] = "Answer all questions correctly to Prove! ";
+}
+
+<style>
+    .quiz-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        color: white;
+    }
+    .quiz-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .quiz-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .question-card {
+        background: white;
+        color: #333;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    .question-card:hover {
+        transform: translateY(-5px);
+    }
+    .question-number {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .question-text {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .form-group input {
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    .form-group input:focus {
+        border-color: #764ba2;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .submit-btn:hover {
+        transform: scale(1.02);
+    }
+    .result-message {
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+        animation: slideDown 0.3s ease-out;
+    }
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .progress-bar-custom {
+        background: rgba(255,255,255,0.3);
+        height: 8px;
+        border-radius: 10px;
+        margin: 15px 0;
+        overflow: hidden;
+    }
+    .progress-fill {
+        background: white;
+        height: 100%;
+        border-radius: 10px;
+    }
+    .score-display {
+        text-align: center;
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    .perfect-score-container {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .perfect-score-container img {
+        max-width: 400px;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .perfect-score-msg {
+        font-size: 28px;
+        font-weight: bold;
+        color: #667eea;
+        margin-top: 20px;
+        font-style: italic;
+    }
+</style>
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>@ViewData["Title"]</h1>
+        <p>Challo batao iska jawab</p>
+        <div class="progress-bar-custom">
+            <div class="progress-fill" style="width: @((ViewBag.Score ?? 0) * 100 / 10)%"></div>
+        </div>
+    </div>
+
+    @if (ViewBag.TotalScore != null)
+    {
+        @if (ViewBag.TotalScore == 10)
+        {
+            <div class="perfect-score-container">
+                <img src="~/images/WhatsApp GIF 2026-02-10 at 14.33.17.gif" alt="Perfect Score" />
+                <div class="perfect-score-msg">🎉 meri 10/10 bauni certified 🎉</div>
+            </div>
+        }
+        else
+        {
+            <div class="result-message alert alert-warning">
+                <span>Score: @ViewBag.TotalScore / 10</span>
+            </div>
+        }
+    }
+
+    <form method="post" autocomplete="off">
+        <!-- Question 1 -->
+        <div class="question-card">
+            <span class="question-number">Question 1</span>
+            <div class="question-text">What is my Name? 😎</div>
+            <div class="form-group">
+                <input type="text" name="answer1" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <span class="question-number">Question 2</span>
+            <div class="question-text">What is 2+2? 🤔</div>
+            <div class="form-group">
+                <input type="text" name="answer2" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <span class="question-number">Question 3</span>
+            <div class="question-text">What is the color of the sky? 🌅</div>
+            <div class="form-group">
+                <input type="text" name="answer3" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <span class="question-number">Question 4</span>
+            <div class="question-text">How many days in a week? 📅</div>
+            <div class="form-group">
+                <input type="text" name="answer4" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <span class="question-number">Question 5</span>
+            <div class="question-text">What is the opposite of hot? ❄️</div>
+            <div class="form-group">
+                <input type="text" name="answer5" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-card">
+            <span class="question-number">Question 6</span>
+            <div class="question-text">What animal says "Moo"? 🐄</div>
+            <div class="form-group">
+                <input type="text" name="answer6" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-card">
+            <span class="question-number">Question 7</span>
+            <div class="question-text">What is the first month of the year? 🎊</div>
+            <div class="form-group">
+                <input type="text" name="answer7" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-card">
+            <span class="question-number">Question 8</span>
+            <div class="question-text">What is the capital of France? 🇫🇷</div>
+            <div class="form-group">
+                <input type="text" name="answer8" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-card">
+            <span class="question-number">Question 9</span>
+            <div class="question-text">How many sides does a triangle have? 🔺</div>
+            <div class="form-group">
+                <input type="text" name="answer9" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-card">
+            <span class="question-number">Question 10</span>
+            <div class="question-text">What is the largest planet in our solar system? 🪐</div>
+            <div class="form-group">
+                <input type="text" name="answer10" class="form-control" placeholder="One word answer" autocomplete="off" />
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">🚀 Submit All Answers</button>
+    </form>
+</div>

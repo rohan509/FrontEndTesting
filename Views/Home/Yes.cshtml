@@ -27,7 +27,8 @@
       align-items: center;
       justify-content: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
+      padding: 20px;
+      overflow-y: auto;
       position: relative;
     }
 
@@ -101,6 +102,14 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    .click-note {
+      font-size: 0.9em;
+      color: #ff69b4;
+      margin-top: 20px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
   </style>
 </head>
 
@@ -120,6 +129,8 @@
       <span class="heart">💖</span>
       <span class="heart">💗</span>
     </div>
+
+    <div class="click-note">👆 Click anywhere to continue 👆</div>
   </div>
 
   <script>
