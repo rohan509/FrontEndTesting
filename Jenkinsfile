@@ -36,7 +36,8 @@ pipeline {
                 echo 'Stopping old app if running...'
                 pkill -f MydeploymentProject.dll || true
                 echo 'Starting application...'
-                nohup /opt/homebrew/bin/dotnet ${PUBLISH_DIR}/${APP_DLL}  --urls ${ASPNETCORE_URLS} &
+                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5000 &
+
                 '''
             }
         }
@@ -45,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 sleep 5
-                curl -f http://0.0.0.0:5000 || true
+                curl -f http://localhost:5000 || true
                 '''
             }
         }
