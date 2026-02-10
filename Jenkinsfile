@@ -1,41 +1,53 @@
+
 pipeline {
     agent any
 
     environment {
         DOTNET = '/opt/homebrew/bin/dotnet'
-        DOTNET_CLI_TELEMETRY_OPTOUT = '1'
-        DOTNET_NOLOGO = '1'
+        PATH = "${DOTNET_HOME}:${env.PATH}"
+
+        ASPNETCORE_URLS = 'http://localhost:5000'
+        PUBLISH_DIR = 'publish'
+        APP_DLL = 'MydeploymentProject.dll'
     }
 
     stages {
 
-        stage('Check dotnet') {
-            steps {
-                sh '''
-                    echo "PATH=$PATH"
-                    $DOTNET --version
-                '''
-            }
-        }
-
         stage('Restore') {
             steps {
-                sh '$DOTNET restore'
+                sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                sh '$DOTNET build --configuration Release'
+                sh 'dotnet build -c Release'
             }
         }
 
         stage('Publish') {
             steps {
+                sh "dotnet publish -c Release -o ${PUBLISH_DIR}"
+            }
+        }
+
+        stage('Deploy (Local)') {
+            steps {
                 sh '''
-                    $DOTNET publish \
-                    --configuration Release \
-                    --output publish
+                echo "Stopping old app if running..."
+                pkill -f ${APP_DLL} || true
+
+                echo "Starting application..."
+                nohup dotnet ${PUBLISH_DIR}/${APP_DLL} > app.log 2>&1 &
+                '''
+            }
+        }
+
+        stage('Smoke Test') {
+            steps {
+                sh '''
+                sleep 5
+                curl -f http://localhost:5000
                 '''
             }
         }
@@ -43,10 +55,11 @@ pipeline {
 
     post {
         success {
-            echo "✅ dotnet works in Jenkins"
+            echo '✅ Application deployed successfully'
         }
         failure {
-            echo "❌ dotnet still not visible"
+            echo '❌ Deployment failed'
         }
     }
 }
+
