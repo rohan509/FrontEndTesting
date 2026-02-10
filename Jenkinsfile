@@ -25,7 +25,8 @@ pipeline {
 
         stage('Publish') {
             steps {
-                 sh "/opt/homebrew/bin/dotnet publish MydeploymentProject/MydeploymentProject.csproj -c Release -o ${PUBLISH_DIR}"
+                 sh "/opt/homebrew/bin/dotnet publish ./MydeploymentProject.csproj -c Release -o ${PUBLISH_DIR}"
+
             }
         }
 
