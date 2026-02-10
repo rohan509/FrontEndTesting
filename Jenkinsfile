@@ -4,7 +4,7 @@ pipeline {
     environment {
         PATH = "/opt/homebrew/bin:${env.PATH}"
         DOTNET_HOME = "/opt/homebrew/opt/dotnet"
-        ASPNETCORE_URLS = 'http://localhost:5000'
+        ASPNETCORE_URLS = '0.0.0.0:5000'
         PUBLISH_DIR = 'publish'
         APP_DLL = 'MydeploymentProject.dll'
     }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 sh '''
                 sleep 5
-                curl -f http://localhost:5000 || true
+                curl -f 0.0.0.0:5000 || true
                 '''
             }
         }
