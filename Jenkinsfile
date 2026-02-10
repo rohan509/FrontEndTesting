@@ -2,44 +2,55 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_ROOT = "/opt/homebrew/bin"
-        PATH = "${DOTNET_ROOT}:${env.PATH}"
+        DOTNET_ENVIRONMENT = 'Production'
+        ASPNETCORE_URLS = 'http://localhost:5000'
+        PUBLISH_DIR = 'publish'
+        APP_DLL = 'MydeploymentProject.dll'
     }
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Restore') {
             steps {
-                echo 'Restoring NuGet packages'
                 sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building application'
                 sh 'dotnet build -c Release'
             }
         }
 
         stage('Publish') {
             steps {
-                echo 'Publishing application'
-                sh 'dotnet publish MydeploymentProject.csproj -c Release -o publish'
+                sh "dotnet publish -c Release -o ${PUBLISH_DIR}"
             }
         }
 
-        stage('Run (Smoke Test)') {
+        stage('Deploy (Local)') {
             steps {
                 sh '''
-                echo "Starting app..."
-                cd publish
-                dotnet MydeploymentProject.dll &
-                APP_PID=$!
+                echo "Stopping old app if running..."
+                pkill -f ${APP_DLL} || true
+
+                echo "Starting application..."
+                nohup dotnet ${PUBLISH_DIR}/${APP_DLL} > app.log 2>&1 &
+                '''
+            }
+        }
+
+        stage('Smoke Test') {
+            steps {
+                sh '''
                 sleep 5
-                echo "App started, PID=$APP_PID"
-                kill $APP_PID
-                echo "App stopped"
+                curl -f http://localhost:5000 || exit 1
                 '''
             }
         }
@@ -47,11 +58,10 @@ pipeline {
 
     post {
         success {
-            echo 'Archiving publish artifacts'
-            archiveArtifacts artifacts: 'publish/**', fingerprint: true
+            echo '✅ Application deployed successfully'
         }
         failure {
-            echo 'Pipeline failed'
+            echo '❌ Deployment failed'
         }
     }
 }
