@@ -23,11 +23,14 @@ pipeline {
             }
         }
 
-     stage('Publish') {
+        stage('Publish') {
     steps {
         sh """
+        echo 'Cleaning old publish folder...'
+        rm -rf ${PUBLISH_DIR}
         mkdir -p ${PUBLISH_DIR}
-        /opt/homebrew/bin/dotnet publish ./MydeploymentProject.csproj -c Release -o ${PUBLISH_DIR}
+
+        /opt/homebrew/bin/dotnet publish MydeploymentProject.csproj -c Release -o ${PUBLISH_DIR}
         """
     }
 }
@@ -39,7 +42,7 @@ pipeline {
                 echo 'Stopping old app if running...'
                 pkill -f MydeploymentProject.dll || true
                 echo 'Starting application...'
-                nohup /opt/homebrew/bin/dotnet $WORKSPACE/${PUBLISH_DIR}/${APP_DLL} --urls http://0.0.0.0:5000 &
+                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5000 &
 
                 '''
             }
