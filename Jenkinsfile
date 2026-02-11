@@ -35,22 +35,23 @@ pipeline {
     }
 }
 
-  stage('Deploy (Local)') {
+stage('Deploy (Local)') {
     steps {
         sh '''
         echo "Stopping old app..."
         pkill -f MydeploymentProject.dll || true
 
-        echo "Starting app..."
-        nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll \
+        echo "Starting app detached..."
+
+        setsid /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll \
         --urls http://0.0.0.0:5050 \
-        > app.log 2>&1 &
+        > app.log 2>&1 < /dev/null &
 
         sleep 3
-        ps aux | grep MydeploymentProject
         '''
     }
 }
+
 
 
         stage('Smoke Test') {
