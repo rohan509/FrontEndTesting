@@ -4,7 +4,7 @@ pipeline {
     environment {
         PATH = "/opt/homebrew/bin:${env.PATH}"
         DOTNET_HOME = "/opt/homebrew/opt/dotnet"
-        ASPNETCORE_URLS = 'http://0.0.0.0:5000'
+        ASPNETCORE_URLS = 'http://0.0.0.0:5050'
         PUBLISH_DIR = 'publish'
         APP_DLL = 'MydeploymentProject.dll'
     }
@@ -35,14 +35,13 @@ pipeline {
     }
 }
 
-
         stage('Deploy (Local)') {
             steps {
                 sh '''
                 echo 'Stopping old app if running...'
                 pkill -f MydeploymentProject.dll || true
                 echo 'Starting application...'
-                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5000 &
+                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5050 &
 
                 '''
             }
@@ -52,7 +51,7 @@ pipeline {
             steps {
                 sh '''
                 sleep 5
-                curl -f http://localhost:5000 || true
+                curl -f http://localhost:5050 || true
                 '''
             }
         }
@@ -67,4 +66,3 @@ pipeline {
         }
     }
 }
-
