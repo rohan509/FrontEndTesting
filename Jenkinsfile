@@ -41,7 +41,9 @@ pipeline {
                 echo 'Stopping old app if running...'
                 pkill -f MydeploymentProject.dll || true
                 echo 'Starting application...'
-                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5050 &
+                nohup /opt/homebrew/bin/dotnet $WORKSPACE/publish/MydeploymentProject.dll --urls http://0.0.0.0:5050 > app.log 2>&1 &
+disown
+
 
                 '''
             }
