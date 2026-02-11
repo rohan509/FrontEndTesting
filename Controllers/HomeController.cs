@@ -61,16 +61,16 @@ public class HomeController : Controller
         // Define correct answers
         Dictionary<string, string> correctAnswers = new()
         {
-            { "answer1", "Rohan" },
-            { "answer2", "Four" },
-            { "answer3", "Blue" },
-            { "answer4", "Seven" },
-            { "answer5", "Cold" },
-            { "answer6", "Cow" },
-            { "answer7", "January" },
-            { "answer8", "Paris" },
-            { "answer9", "Three" },
-            { "answer10", "Jupiter" }
+            { "answer1", "Wife on Leave" },
+            { "answer2", "Gerbera Daisy" },
+            { "answer3", "orchid" },
+            { "answer4", "gym" },
+            { "answer5", "Pragati" },
+            { "answer6", "Shyambhavi" },
+            { "answer7", "Infinite" },
+            { "answer8", "Temple" },
+            { "answer9", "Vomit" },
+            { "answer10", "puchi" }
         };
 
         // Check answers
@@ -91,8 +91,7 @@ public class HomeController : Controller
         int score = 0;
         foreach (var key in correctAnswers.Keys)
         {
-            if (userAnswers[key] != null && 
-                userAnswers[key].Trim().Equals(correctAnswers[key], StringComparison.OrdinalIgnoreCase))
+            if (userAnswers[key] != null && ((userAnswers[key].Trim().Equals(correctAnswers[key], StringComparison.OrdinalIgnoreCase)) || userAnswers[key].Trim().ToLower()=="manu"))
             {
                 score++;
             }
