@@ -199,9 +199,12 @@
       noButton.style.top = randomY + 'px';
       noButton.style.transition = 'all 0.3s ease';
     }
-    
+
     noButton.addEventListener('mouseover', moveButtonRandomly);
     noImage.addEventListener('mouseover', moveButtonRandomly);
+
+    noButton.addEventListener('click', moveButtonRandomly);
+    noImage.addEventListener('click', moveButtonRandomly);
   </script>
 </body>
 
