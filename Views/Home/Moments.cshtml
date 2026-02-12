@@ -223,7 +223,7 @@
             @for (int i = 1; i <= 10; i++)
             {
                 <div class="photo-card" onclick="openModal(@i)">
-                    <img src="~/images/download.jpeg" alt="Moment @i" />
+                    <img src="~/images/photo@(i).jpeg" alt="Moment @i" />
                     <div class="photo-number">Moment @i</div>
                 </div>
             }
@@ -249,21 +249,23 @@
 
 <script>
     const photoDescriptions = [
-        "This moment captures a beautiful sunset with golden light reflecting off the water. The serene atmosphere and vibrant colors make it a perfect memory to cherish forever.",
-        "A candid shot of joy and laughter shared with loved ones. This photo reminds us of the precious moments that make life meaningful and worth celebrating.",
-        "Nature's masterpiece frozen in time. The intricate details and natural beauty showcased here are a testament to the wonders of the world around us.",
-        "An unexpected adventure that turned into an unforgettable memory. Every journey begins with a single step, and this moment marks the beginning of something special.",
-        "The quiet beauty of solitude in a crowded world. Sometimes the most meaningful moments are the ones we experience alone, reflecting and appreciating life.",
-        "Friendship goals achieved! This photo perfectly captures the bond shared between kindred spirits. True friends are the family we choose for ourselves.",
-        "A burst of colors and energy that defines youth and freedom. This moment represents endless possibilities and the exciting adventures that lie ahead.",
-        "Capturing the essence of togetherness and warmth. In a world of chaos, these moments of connection remind us why we keep moving forward.",
-        "The beauty of imperfection and authenticity shines through in this genuine moment. Real life is messy, beautiful, and absolutely worth photographing.",
-        "An eternal reminder of a time when everything felt possible. This moment is a snapshot of dreams, hopes, and the incredible journey we're all on."
+        "Kitne pyaare lag rhe hai na dono..... koi dekh kar bata sakta hai yeeh log cafe se glass ka cup charane walle h",
+        "Our first religious date together, with a beautfull blessing",
+        "Apka face mere ek frnd se milta hai... hehehehe...",
+        "Guess karo ki hum kn si movie dekh rahe hai ??",
+        "Tum Anshika se thora dur hi raho.... I am serious...",
+        "Jhnga laa laa hu.....",
+        "Tum aage aage mai puche piche.....",
+        "First visit at jagmag thela",
+        "Pre-Wedding photoshoot in advance",
+        "Scorpio-N ke liye kya kya nahi karna padta hai....."
+
     ];
 
     function openModal(momentNumber) {
         const modal = document.getElementById('photoModal');
-        document.getElementById('modalImage').src = '/images/download.jpeg';
+        document.getElementById('modalImage').src = '/images/photo' + momentNumber + '.jpeg';
+
         document.getElementById('modalTitle').textContent = 'Moment ' + momentNumber;
         document.getElementById('modalDescription').textContent = photoDescriptions[momentNumber - 1];
         modal.classList.add('show');
